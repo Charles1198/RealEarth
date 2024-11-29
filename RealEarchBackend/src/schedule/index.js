@@ -6,10 +6,6 @@ const axios = require('axios')
 
 cron.schedule('0,10,20,30,40,50 * * * *', scheduledTask)
 
-setTimeout(() => {
-  scheduledTask()
-}, 1000)
-
 async function scheduledTask() {
   // 组装当前图片链接和名称。因为原始图片10分钟刷新一次，现在的肯定没有，所以获取10分钟之前的图片
   let imageInfo = setupCurEarthImageInfo(10)

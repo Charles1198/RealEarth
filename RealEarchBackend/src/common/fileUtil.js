@@ -1,13 +1,16 @@
 const fs = require('fs')
-const path = require('path')
 
-async function saveFile(file, path) {
+async function saveFile(file, filePath) {
+  const dir = filePath.substring(0, filePath.lastIndexOf('\\'))
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir)
+  }
   return new Promise((resolve) => {
-    fs.writeFile(path, file, (err) => {
+    fs.writeFile(filePath, file, (err) => {
       if (err) {
         resolve({ data: '', err: err.message })
       } else {
-        resolve({ data: path, err: '' })
+        resolve({ data: filePath, err: '' })
       }
     })
   })
