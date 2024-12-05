@@ -7,9 +7,9 @@ class ImageDownloader {
     this._client = new OSS({
       region: 'oss-cn-beijing',
       // 从环境变量中获取AccessKey ID的值
-      accessKeyId: process.env.ALIBABA_CLOUD_ACCESS_KEY_ID,
+      accessKeyId: process.env.ALIBABA_CLOUD_ACCESS_REAL_EARTH_KEY_ID,
       // 从环境变量中获取AccessKey Secret的值
-      accessKeySecret: process.env.ALIBABA_CLOUD_ACCESS_KEY_SECRET,
+      accessKeySecret: process.env.ALIBABA_CLOUD_ACCESS_REAL_EARTH_KEY_SECRET,
       authorizationV4: true,
       // 存储空间名称。
       bucket: 'real-earth'
