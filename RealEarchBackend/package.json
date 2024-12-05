@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@koa/router": "^13.1.0",
+    "ali-oss": "^6.21.0",
     "axios": "^1.7.8",
     "koa": "^2.15.3",
     "koa-static": "^5.0.0",
