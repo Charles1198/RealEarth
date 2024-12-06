@@ -1,16 +1,7 @@
 const Router = require('@koa/router')
-const OSS = require('ali-oss')
+const ossClient = require('./ossClient')
 
-const client = new OSS({
-  region: 'oss-cn-beijing',
-  // 从环境变量中获取AccessKey ID的值
-  accessKeyId: process.env.ALIBABA_CLOUD_ACCESS_REAL_EARTH_KEY_ID,
-  // 从环境变量中获取AccessKey Secret的值
-  accessKeySecret: process.env.ALIBABA_CLOUD_ACCESS_REAL_EARTH_KEY_SECRET,
-  authorizationV4: true,
-  // 存储空间名称。
-  bucket: 'real-earth'
-})
+const client = ossClient()
 
 const router = new Router({ prefix: '/earth' })
 
