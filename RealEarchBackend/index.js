@@ -12,7 +12,7 @@ app.use(router.routes()).use(router.allowedMethods())
 app.use(koaStatic(path.join(__dirname, 'public')))
 
 app.listen(3001, () => {
-  console.log('server is running, port is 3000')
+  console.log('server is running, port is 3001')
 
   // 定时下载图片保存到阿里云oss
   const imageDownloader = new ImageDownloader()
