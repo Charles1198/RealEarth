@@ -18,7 +18,8 @@ router.get('/past24hour', async (ctx) => {
 
     if (res.statusCode === 200) {
       const imageList = objects.map((item) => {
-        return { size: item.size, url: item.url }
+        const updateAt = item.lastModified.replace('T', ' ').substring(0, 19)
+        return { size: item.size, url: item.url, updateAt: updateAt }
       }).reverse()
       ctx.body = successResp(imageList)
     } else {
