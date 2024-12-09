@@ -1,8 +1,8 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
-import { app, BrowserWindow, ipcMain, shell } from 'electron'
-import { join } from 'path'
+import { app, BrowserWindow, ipcMain, Menu, shell, Tray } from 'electron'
+import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
-import { getEarthImages, getLatestRefreshTime } from './request'
+import { getEarthImages } from './request'
 import { changeWallpaper, changeWallpaperRealTime } from './wallPaper'
 
 function createWindow() {
@@ -36,6 +36,15 @@ function createWindow() {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  // 拦截窗口关闭事件
+  mainWindow.on('close', (event) => {
+    event.preventDefault()
+    mainWindow.hide()
+  })
+
+  // 创建托盘，关闭程序时最小化到托盘
+  createTray(mainWindow)
 }
 
 // This method will be called when Electron has finished
@@ -63,7 +72,6 @@ app.whenReady().then(() => {
   ipcMain.on('setWallpaperManual', changeWallpaper)
   ipcMain.on('setWallpaperRealTime', changeWallpaperRealTime)
 
-  ipcMain.handle('getLatestRefreshTime', () => getLatestRefreshTime)
   ipcMain.handle('getEarthImages', () => getEarthImages)
 })
 
@@ -75,3 +83,36 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+
+function createTray(mainWindow) {
+  // 创建托盘图标和菜单
+  const tray = new Tray(path.join(__dirname, '../../resources/icon.png'))
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: '显示',
+      click: () => {
+        mainWindow.show()
+      }
+    },
+    {
+      label: '隐藏',
+      click: () => {
+        mainWindow.hide()
+      }
+    },
+    { type: 'separator' },
+    {
+      label: '退出',
+      click: () => {
+        app.quit()
+      }
+    }
+  ])
+  tray.setContextMenu(contextMenu)
+  tray.setToolTip('real earth')
+
+  // 监听托盘图标的点击事件
+  tray.on('click', () => {
+    mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
+  })
+}

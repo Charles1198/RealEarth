@@ -6,14 +6,16 @@ import path from 'path'
 import { addPaddingForImage } from './imageTool'
 
 export async function changeWallpaperRealTime() {
-  cron.schedule('0,10,20,30,40,50 * * * *', changeWallpaper)
+  cron.schedule('1,11,21,31,41,51 * * * *', changeWallpaper)
   await changeWallpaper()
 }
 
 export async function changeWallpaper() {
-  const latestEarthImagePath = await downloadImage('http://localhost:3000/earth_latest.png')
+  const latestEarthImagePath = await downloadImage(
+    'http://real-earth.oss-cn-beijing.aliyuncs.com/latest/latest.png'
+  )
   if (!latestEarthImagePath) {
-    console.log('未能下载到图片')
+    console.log('unable to download earth image')
     return
   }
 
@@ -61,11 +63,9 @@ function saveImage(res, imageName) {
     res
       .pipe(curImageFile)
       .on('finish', () => {
-        console.log('save success')
         resolve(imagePath)
       })
-      .on('error', (e) => {
-        console.log('save failed: ' + e.message)
+      .on('error', () => {
         resolve(null)
       })
   })

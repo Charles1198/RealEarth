@@ -26,6 +26,10 @@
       <img alt="icon" height="24" src="./assets/icon_refresh.svg" width="24" />
       刷新
     </div>
+    <div class="button" title="刷新当前地球" @click="handleRefresh">
+      <img alt="icon" height="24" src="./assets/icon_refresh.svg" width="24" />
+      开机自启动 <br />开
+    </div>
   </div>
 
   <div v-if="currentEarthImageTime" class="refresh-at">{{ currentEarthImageTime }}</div>
@@ -173,11 +177,19 @@ const handleShowTimeLine = () => {
 }
 
 .button {
+  font-size: 12px;
   display: flex;
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  text-align: center;
   opacity: 0.6;
+}
+
+@media screen and (minwidth: 1000px) {
+  .button {
+    font-size: 14px;
+  }
 }
 
 .button:hover {

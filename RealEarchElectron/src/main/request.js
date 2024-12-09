@@ -1,6 +1,4 @@
-export const getLatestRefreshTime = fetchRequest('http://localhost:3000/earth/latestTime')
-
-export const getEarthImages = fetchRequest('http://localhost:3000/earth/images')
+export const getEarthImages = fetchRequest('http://jiayueji.cn:3001/earth/past24hour')
 
 function fetchRequest(url) {
   return new Promise((resolve) => {
