@@ -50,7 +50,7 @@ class ImageDownloader {
     hour = hour < 10 ? `0${hour}` : `${hour}`
     minute = minute < 10 ? `0${minute}` : `${minute}`
     return {
-      imageUrl: `https://himawari8-dl.nict.go.jp/himawari8/img/D531106/1d/550/${year}/${month}/${day}/${hour}${minute}00_0_0.png`,
+      imageUrl: `https://himawari8-dl.nict.go.jp/himawari.asia/img/D531106/1d/550/${year}/${month}/${day}/${hour}${minute}00_0_0.png`,
       imageName: `${year}_${month}_${day}_${hour}_${minute}.png`
     }
   }
